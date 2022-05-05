@@ -41,7 +41,7 @@ namespace tk
         float ai_throttle = 0.0f;
         float ai_brake = 0.0f;
 
-        float ai_reward=0.0f;
+        float ai_info=0.0f;
 
         int iActiveSpan = 0;
 
@@ -59,7 +59,7 @@ namespace tk
         }
 
         public State state = State.UnConnected;
-        public Text ai_reward_text;
+        public Text ai_info_text;
 
         void Awake()
         {
@@ -69,10 +69,10 @@ namespace tk
             carSpawner = GameObject.FindObjectOfType<CarSpawner>();
             Canvas canvas = GameObject.FindObjectOfType<Canvas>();
             GameObject go = CarSpawner.getChildGameObject(canvas.gameObject, "AISteering");
-            GameObject gow = CarSpawner.getChildGameObject(canvas.gameObject, "AIReward");
+            GameObject gow = CarSpawner.getChildGameObject(canvas.gameObject, "AIInfo");
             if (go != null)
                 ai_text = go.GetComponent<Text>();
-                ai_reward_text=gow.GetComponent<Text>();
+                ai_info_text=gow.GetComponent<Text>();
 
             if (pm != null && carObj != null)
             {
@@ -264,7 +264,7 @@ namespace tk
                 ai_steering = float.Parse(json["steering"].str, CultureInfo.InvariantCulture.NumberFormat);
                 ai_throttle = float.Parse(json["throttle"].str, CultureInfo.InvariantCulture.NumberFormat);
                 ai_brake = float.Parse(json["brake"].str, CultureInfo.InvariantCulture.NumberFormat);
-                ai_reward=float.Parse(json["reward"].str, CultureInfo.InvariantCulture.NumberFormat);
+                ai_info=float.Parse(json["info"].str, CultureInfo.InvariantCulture.NumberFormat);
 
                 ai_steering = clamp(ai_steering, -1.0f, 1.0f);
                 ai_throttle = clamp(ai_throttle, -1.0f, 1.0f);
@@ -640,8 +640,8 @@ namespace tk
 
                 if (ai_text != null)
                     ai_text.text = string.Format("NN: {0} : {1}", ai_steering, ai_throttle);
-                if (ai_reward_text != null)
-                    ai_reward_text.text = string.Format("Reward: {0}", ai_reward);
+                if (ai_info_text != null)
+                    ai_info_text.text = string.Format("{0}", ai_info);
 
                 Vector3 currentPos = car.GetTransform().position;
                 float distance = Vector3.Distance(currentPos, lastPos);

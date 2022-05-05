@@ -440,6 +440,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8641959849460670756, guid: eabc56342400f044a927e8767dfd1a24,
         type: 3}
+    - target: {fileID: 114798992687500020, guid: 89b891dc9d0fe46ffba6fbc78477652f,
+        type: 3}
+      propertyPath: roadMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 426a3f7e2ae6f414683203f44f6095b6, type: 2}
     - target: {fileID: 114920941206241424, guid: 89b891dc9d0fe46ffba6fbc78477652f,
         type: 3}
       propertyPath: menuObj

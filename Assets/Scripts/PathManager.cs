@@ -454,8 +454,8 @@ public class PathManager : MonoBehaviour
             carPath.nodes.Add(p);
 
             carPath.centerNodes.Add(p);
-            GameObject ob=Instantiate(debugPoint);
-            ob.transform.position=point;
+            // GameObject ob=Instantiate(debugPoint);
+            // ob.transform.position=point;
         }
 
     }

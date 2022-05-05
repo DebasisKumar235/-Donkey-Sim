@@ -48,6 +48,8 @@ namespace tk
         bool bResetCar = false;
         bool bExitScene = false;
 
+        public Texture2D encoderTex;
+
         public enum State
         {
             UnConnected,
@@ -82,6 +84,7 @@ namespace tk
 
             client.dispatchInMainThread = false; //too slow to wait.
             client.dispatcher.Register("get_protocol_version", new tk.Delegates.OnMsgRecv(OnProtocolVersion));
+            client.dispatcher.Register("debug", new tk.Delegates.OnMsgRecv(OnDebug));
             client.dispatcher.Register("control", new tk.Delegates.OnMsgRecv(OnControlsRecv));
             client.dispatcher.Register("exit_scene", new tk.Delegates.OnMsgRecv(OnExitSceneRecv));
             client.dispatcher.Register("reset_car", new tk.Delegates.OnMsgRecv(OnResetCarRecv));
@@ -134,6 +137,12 @@ namespace tk
             json.AddField("version", "2");
 
             client.SendMsg(json);
+        }
+        void OnDebug(JSONObject msg){
+            byte[] img=Convert.FromBase64String(msg["image"].str);
+            encoderTex = new Texture2D(1,1);
+            encoderTex.LoadImage( img);
+
         }
 
         void SendTelemetry()

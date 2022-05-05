@@ -27,6 +27,9 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
     public TerrainToolkit terToolkit;
     public Terrain terrain;
 
+    GameObject leftColliderParent;
+    GameObject rightColliderParent;
+
     [Header("Aux")]
     public string savePath = "Assets\\generated_mesh.asset";
 
@@ -56,6 +59,8 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
     {
         GameObject[] prev = GameObject.FindGameObjectsWithTag("road_mesh");
 
+        Destroy(leftColliderParent);
+        Destroy(rightColliderParent);
         foreach (GameObject g in prev)
             Destroy(g);
 
@@ -111,8 +116,8 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
 
         GameObject go = GameObject.Instantiate(roadPrefabMesh);
 
-        GameObject leftColliderParent=new GameObject("LeftColliders");
-        GameObject rightColliderParent=new GameObject("RightColliders");
+        leftColliderParent=new GameObject("LeftColliders");
+        rightColliderParent=new GameObject("RightColliders");
 
         MeshRenderer mr = go.GetComponent<MeshRenderer>();
         MeshFilter mf = go.GetComponent<MeshFilter>();
@@ -170,7 +175,6 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
         {
             if (iNode + 1 < path.nodes.Count)
             {
-                Debug.Log("Path Node Count: "+path.nodes.Count);
                 nodeA = path.nodes[iNode];
                 nodeB = path.nodes[iNode + 1];
                 posA = nodeA.pos;
@@ -209,12 +213,16 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
             centerNode.rotation = nodeA.rotation;
             path.centerNodes.Add(centerNode);
             
-            Collider colliderLeft=GameObject.Instantiate(roadCollider);
-            Collider colliderRight=GameObject.Instantiate(roadCollider);
-            colliderLeft.transform.SetPositionAndRotation(leftPos,nodeA.rotation);
-            colliderLeft.transform.SetParent(leftColliderParent.transform);
-            colliderRight.transform.SetPositionAndRotation(rightPos,nodeA.rotation);
-            colliderRight.transform.SetParent(rightColliderParent.transform);
+            if(i>1 && iVert < numVerts-2){
+
+                Collider colliderLeft=GameObject.Instantiate(roadCollider);
+                Collider colliderRight=GameObject.Instantiate(roadCollider);
+                colliderLeft.transform.SetPositionAndRotation(leftPos,nodeA.rotation);
+                colliderLeft.transform.SetParent(leftColliderParent.transform);
+                colliderRight.transform.SetPositionAndRotation(rightPos,nodeA.rotation);
+                colliderRight.transform.SetParent(rightColliderParent.transform);
+            }
+            i++;
 
             vertices[iVert] = leftPos;
             vertices[iVert + 1] = rightPos;

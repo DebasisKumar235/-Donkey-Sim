@@ -20,7 +20,7 @@ namespace tk
         public PathManager pm;
         public CarConfig conf;
 
-        // Sensors
+        // Sensorsa
         public CameraSensor camSensor;
         public CameraSensor camSensorB;
         public Lidar lidar;

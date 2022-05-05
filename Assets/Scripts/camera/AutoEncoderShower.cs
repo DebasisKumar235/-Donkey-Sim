@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 public class AutoEncoderShower : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame updates
     [SerializeField] 
     public RawImage rawImage;
     public Texture2D[] tex;

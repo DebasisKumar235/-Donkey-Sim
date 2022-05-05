@@ -138,10 +138,13 @@ namespace tk
 
             client.SendMsg(json);
         }
+        public byte[] encoderBytes;
         void OnDebug(JSONObject msg){
-            byte[] img=Convert.FromBase64String(msg["image"].str);
-            encoderTex = new Texture2D(1,1);
-            encoderTex.LoadImage( img);
+            // byte[] img=Convert.FromBase64String(msg["image"].str);
+            encoderBytes=Convert.FromBase64String(msg["image"].str);
+
+            // encoderTex = new Texture2D(1,1);
+            // encoderTex.LoadImage( img);
 
         }
 

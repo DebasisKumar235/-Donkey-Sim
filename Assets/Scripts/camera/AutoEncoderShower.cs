@@ -53,7 +53,10 @@ public class AutoEncoderShower : MonoBehaviour
 
         }
         if (rawImage.enabled && carHandler !=null ){
-            rawImage.texture=carHandler.encoderTex;
+            // rawImage.texture=carHandler.encoderTex;
+            Texture2D texture = new Texture2D(1,1);
+            texture.LoadImage( carHandler.encoderBytes);
+            rawImage.texture=texture;
         }
     }
 }

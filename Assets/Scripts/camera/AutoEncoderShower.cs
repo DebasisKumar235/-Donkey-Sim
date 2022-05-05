@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Unity.Collections;
+
 public class AutoEncoderShower : MonoBehaviour
 {
     // Start is called before the first frame updates
@@ -14,11 +16,11 @@ public class AutoEncoderShower : MonoBehaviour
     void Start()
     {
         
-        // Object[] textures = Resources.LoadAll("images", typeof(Texture2D));
-        // tex = new Texture2D[textures.Length];
-        // for (int i = 0; i < textures.Length; i++){
-        //   tex[i] = (Texture2D)textures[i];
-        // }
+        Object[] textures = Resources.LoadAll("images", typeof(Texture2D));
+        tex = new Texture2D[textures.Length];
+        for (int i = 0; i < textures.Length; i++){
+          tex[i] = (Texture2D)textures[i];
+        }
         // StartCoroutine(imageRend());
     }
     IEnumerator imageRend () {
@@ -39,6 +41,7 @@ public class AutoEncoderShower : MonoBehaviour
         // }
 	}
     // Update is called once per frame
+    Texture2D tempTex;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B)){
@@ -54,9 +57,20 @@ public class AutoEncoderShower : MonoBehaviour
         }
         if (rawImage.enabled && carHandler !=null ){
             // rawImage.texture=carHandler.encoderTex;
-            Texture2D texture = new Texture2D(1,1);
-            texture.LoadImage( carHandler.encoderBytes);
-            rawImage.texture=texture;
+            // byte[] bytes=tex[1].GetRawTextureData();
+
+            tempTex=new Texture2D(1920,1080);
+            Debug.Log(carHandler.encoderBytes);
+            tempTex.LoadImage(carHandler.encoderBytes);
+            // ImageConversion.LoadImage(rawImage.texture,bytes);
+            rawImage.texture=tempTex;
+
+            // rawImage.texture.LoadImage(bytes);
+            // rawImage.texture.Apply();
+
+
+            // rawImage.texture.LoadImage(carHandler.encoderBytes);
+            // rawImage.texture.Apply();
         }
     }
 }

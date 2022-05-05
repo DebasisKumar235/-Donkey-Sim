@@ -427,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 114576669822105592, guid: 89b891dc9d0fe46ffba6fbc78477652f,
         type: 3}
       propertyPath: doMakeRandomPath
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114798992687500020, guid: 89b891dc9d0fe46ffba6fbc78477652f,
         type: 3}
@@ -1435,6 +1435,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 278918941}
     m_Modifications:
+    - target: {fileID: 1835194746361094, guid: 0eae2b67074794fe697e7dd14e8aa706, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224462425246791598, guid: 0eae2b67074794fe697e7dd14e8aa706,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1792,6 +1796,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 278918941}
     m_Modifications:
+    - target: {fileID: 1079860802561910, guid: 7a25587ae4fe446b98418947bb7da6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1442542742170752, guid: 7a25587ae4fe446b98418947bb7da6cb, type: 3}
       propertyPath: m_IsActive
       value: 1

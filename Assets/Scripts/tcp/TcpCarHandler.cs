@@ -41,7 +41,7 @@ namespace tk
         float ai_throttle = 0.0f;
         float ai_brake = 0.0f;
 
-        float ai_info=0.0f;
+        string ai_info= "";
 
         int iActiveSpan = 0;
 
@@ -264,7 +264,7 @@ namespace tk
                 ai_steering = float.Parse(json["steering"].str, CultureInfo.InvariantCulture.NumberFormat);
                 ai_throttle = float.Parse(json["throttle"].str, CultureInfo.InvariantCulture.NumberFormat);
                 ai_brake = float.Parse(json["brake"].str, CultureInfo.InvariantCulture.NumberFormat);
-                ai_info=float.Parse(json["info"].str, CultureInfo.InvariantCulture.NumberFormat);
+                ai_info= json["info"].str;
 
                 ai_steering = clamp(ai_steering, -1.0f, 1.0f);
                 ai_throttle = clamp(ai_throttle, -1.0f, 1.0f);

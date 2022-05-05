@@ -13,15 +13,18 @@ public class AutoEncoderShower : MonoBehaviour
     public Texture2D[] tex;
     GameObject car;
     tk.TcpCarHandler carHandler;
+    byte[] rawData;
     void Start()
     {
         
-        Object[] textures = Resources.LoadAll("images", typeof(Texture2D));
-        tex = new Texture2D[textures.Length];
-        for (int i = 0; i < textures.Length; i++){
-          tex[i] = (Texture2D)textures[i];
-        }
+        // Object[] textures = Resources.LoadAll("images", typeof(Texture2D));
+        // tex = new Texture2D[textures.Length];
+        // for (int i = 0; i < textures.Length; i++){
+        //   tex[i] = (Texture2D)textures[i];
+        // }
         // StartCoroutine(imageRend());
+        string filename = "D:\\Workplace\\ML\\Project\\new_footage\\tub_85_21-11-26\\images\\0_cam_image_array_.jpg";
+        rawData = System.IO.File.ReadAllBytes(filename);
     }
     IEnumerator imageRend () {
         foreach (Texture2D t in tex)
@@ -60,9 +63,13 @@ public class AutoEncoderShower : MonoBehaviour
             // byte[] bytes=tex[1].GetRawTextureData();
 
             tempTex=new Texture2D(1920,1080);
-            Debug.Log(carHandler.encoderBytes);
-            tempTex.LoadImage(carHandler.encoderBytes);
+            // Debug.Log(carHandler.encoderBytes);
+            // tempTex.LoadImage(rawData);
+            // tempTex.LoadImage(carHandler.encoderBytes);
             // ImageConversion.LoadImage(rawImage.texture,bytes);
+            string filename = carHandler.encoderImagePath;
+            rawData = System.IO.File.ReadAllBytes(filename);
+            tempTex.LoadImage(rawData);
             rawImage.texture=tempTex;
 
             // rawImage.texture.LoadImage(bytes);

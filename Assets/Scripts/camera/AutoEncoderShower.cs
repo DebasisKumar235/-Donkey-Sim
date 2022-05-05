@@ -23,8 +23,8 @@ public class AutoEncoderShower : MonoBehaviour
         //   tex[i] = (Texture2D)textures[i];
         // }
         // StartCoroutine(imageRend());
-        string filename = "D:\\Workplace\\ML\\Project\\new_footage\\tub_85_21-11-26\\images\\0_cam_image_array_.jpg";
-        rawData = System.IO.File.ReadAllBytes(filename);
+        //string filename = "D:\\Workplace\\ML\\Project\\new_footage\\tub_85_21-11-26\\images\\0_cam_image_array_.jpg";
+        //rawData = System.IO.File.ReadAllBytes(filename);
     }
     IEnumerator imageRend () {
         foreach (Texture2D t in tex)

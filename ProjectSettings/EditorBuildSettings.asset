@@ -35,6 +35,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/thunderhill.unity
     guid: 448a6171da9da33418cad0e20a23f49e
+  - enabled: 1
+    path: Assets/Scenes/mini_monaco_v2.unity
+    guid: 41e1e6aa3e7f43749951f3e60a690596
+  - enabled: 1
+    path: Assets/Scenes/mini_monaco_v3.unity
+    guid: 1d614a481ec412f498b57823bd270e2b
+  - enabled: 1
+    path: Assets/Scenes/mini_monaco_v4.unity
+    guid: 89f5e2a40f26ecc49a8bda55121dfc46
   - enabled: 0
     path: Assets/Scenes/ironcar.unity
     guid: a945785e2aa7ea7468cfc040f2063ad8

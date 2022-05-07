@@ -2109,15 +2109,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene_names:
-  - generated_road
-  - warehouse
-  - sparkfun_avc
-  - generated_track
-  - roboracingleague_1
-  - waveshare
-  - mini_monaco
   - warren
   - circuit_launch
+  - sparkfun_avc
+  - waveshare
+  - roboracingleague_1
+  - warehouse
+  - generated_track
+  - generated_road
+  - mini_monaco
   - mountain_track
   - mini_monaco_v2
   - mini_monaco_v4

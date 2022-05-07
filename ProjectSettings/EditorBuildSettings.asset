@@ -44,6 +44,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mini_monaco_v4.unity
     guid: 89f5e2a40f26ecc49a8bda55121dfc46
+  - enabled: 1
+    path: Assets/Scenes/generated_road_v4.unity
+    guid: 418a9742de43aa3478fb0f59c7582eed
+  - enabled: 1
+    path: Assets/Scenes/generated_road_v3.unity
+    guid: d63ea1eeff09412429166305040e1e64
+  - enabled: 1
+    path: Assets/Scenes/generated_road_v2.unity
+    guid: 90cee1579b9a09f40a04f77fc6785292
   - enabled: 0
     path: Assets/Scenes/ironcar.unity
     guid: a945785e2aa7ea7468cfc040f2063ad8

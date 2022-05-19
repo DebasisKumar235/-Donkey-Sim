@@ -76,9 +76,11 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
         {
             foreach (GameObject createdObject in createdObjects)
             {
-                Vector3 conepos = createdObject.transform.position;
+                ColCone col = createdObject.GetComponentInChildren<ColCone>();
+                Vector3 conepos = col.transform.position;
+                string conePosStr="("+(conepos.x+0.70438)+", 0.0649, "+(conepos.z)+")";
                 string coneName=createdObject.name;
-                writer.WriteLine(conepos.ToString()+ "*" + coneName); 
+                writer.WriteLine(conePosStr+ "*" + coneName); 
             }
         }
     }
@@ -97,6 +99,8 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
             Vector3 posVector= new Vector3(float.Parse(vector3StringValues[0]), float.Parse(vector3StringValues[1]), float.Parse(vector3StringValues[2]));
             GameObject go = Instantiate(conePrefabs[iConePrefab], posVector, conePrefabs[iConePrefab].transform.rotation);
             go.name=info[1];
+            ColCone col = go.GetComponentInChildren<ColCone>();
+            col.name=info[1];
             createdObjects.Add(go);
 
         }
@@ -157,6 +161,7 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
             // Debug.Log(xz_coords+""+rand_pos_offset);
             go.name="Cone_"+random_index;
             ColCone col = go.GetComponentInChildren<ColCone>();
+            col.name="Cone_"+random_index;
             if (col != null) { col.index = index; }
             createdObjects.Add(go);
         }

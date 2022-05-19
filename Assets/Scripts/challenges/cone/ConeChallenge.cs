@@ -55,6 +55,11 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
     }
 
     public void resetConesOnEpisode(){
+
+        if(File.Exists(predefinedConesFile)){
+            loadConesFromFile();
+            return;
+        }
         if(File.Exists(coneconfigFile)){
             ConfigJson configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
             if(configJson.randomizeConesEveryReset){
@@ -62,7 +67,13 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
                 numRandCone=coneCount;
                 ResetChallenge();
                 isConfigFileExists=true;
+                return;
 
+            }
+            if(configJson.coneCount!=numRandCone){
+                int coneCount=configJson.coneCount;
+                numRandCone=coneCount;
+                ResetChallenge();
             }
 
             // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));

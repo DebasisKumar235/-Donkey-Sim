@@ -1,4 +1,4 @@
 {
-    "coneCount":1,
-    "randomizeConesEveryReset":false
+    "coneCount":100,
+    "randomizeConesEveryReset":true
 }

@@ -11,6 +11,11 @@ public class GlobalStateEditor : MonoBehaviour
         get { return GlobalState.port; }
         set { GlobalState.port = value; }
     }
+    public int coneCount
+    {
+        get { return GlobalState.coneCount; }
+        set { GlobalState.coneCount = value; }
+    }
     public int portPrivateAPI
     {
         get { return GlobalState.portPrivateAPI; }
@@ -200,6 +205,15 @@ public class GlobalStateEditor : MonoBehaviour
             maxSplitScreen = tmp_maxsp;
         YOffset += Ysteps;
 
+
+        GUI.Label(new Rect(0, YOffset, LabelXOffset, 20), "Cone Count");
+        string coneCountString = GUI.TextField(new Rect(LabelXOffset, YOffset, width-LabelXOffset, 20), coneCount.ToString());
+        int tmp_coneCount = coneCount;
+        int.TryParse(coneCountString, out tmp_coneCount);
+        if (tmp_coneCount != coneCount)
+            coneCount = tmp_coneCount;
+        YOffset += Ysteps;
+
         extendedTelemetry = GUI.Toggle(new Rect(0, YOffset, width, 20), extendedTelemetry, "extendedTelemetry");
         YOffset += Ysteps;
         generateTrees = GUI.Toggle(new Rect(0, YOffset, width, 20), generateTrees, "generateTrees");
@@ -317,12 +331,14 @@ public class GlobalStateEditor : MonoBehaviour
         PlayerPrefs.SetFloat("ki", ki);
         PlayerPrefs.SetInt("useSeed", useSeed ? 1 : 0);
         PlayerPrefs.SetString("privateKey", privateKey);
+        PlayerPrefs.SetInt("coneCount", coneCount);
 
         PlayerPrefs.Save();
     }
 
     void LoadPlayerPrefs()
     {
+        coneCount = PlayerPrefs.GetInt("coneCount", coneCount);
         port = PlayerPrefs.GetInt("port", port);
         portPrivateAPI = PlayerPrefs.GetInt("portPrivateAPI", portPrivateAPI);
         fps = PlayerPrefs.GetInt("fps", fps);

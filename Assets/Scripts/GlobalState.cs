@@ -13,6 +13,8 @@ public static class GlobalState
     public static int maxSplitScreen = 4;
     public static bool bAutoHideSceneMenu = false;
 
+    public static int coneCount=20;
+
     // should we create a car even though we don't have a network client?
     public static bool bCreateCarWithoutNetworkClient = false;
     public static string log_path = "default";
@@ -35,4 +37,5 @@ public static class GlobalState
     public static List<AssetBundle> bundleScenes = new List<AssetBundle>();
     public static bool drawLidar = true;
     public static float timeOut = 300f;
+    public static bool isPredefinedCones = false;
 }

@@ -2005,7 +2005,7 @@ PrefabInstance:
     - target: {fileID: 1685762601780632596, guid: 07f0ed3f4d97ab546b616cad407a0b96,
         type: 3}
       propertyPath: numRandCone
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1685762601780632596, guid: 07f0ed3f4d97ab546b616cad407a0b96,
         type: 3}

@@ -49,6 +49,9 @@ namespace tk
         float time_step = 0.1f;
         bool bResetCar = false;
         bool bExitScene = false;
+        GameObject coneSpawner;
+        ConeChallenge cc;
+
 
         public Texture2D encoderTex;
 
@@ -63,6 +66,10 @@ namespace tk
 
         void Awake()
         {
+            coneSpawner=GameObject.Find("ConeChallenge");
+            if(coneSpawner){
+                cc=coneSpawner.GetComponent<ConeChallenge>();
+            }
             car = carObj.GetComponent<ICar>();
             conf = carObj.GetComponent<CarConfig>();
             pm = GameObject.FindObjectOfType<PathManager>();
@@ -615,6 +622,11 @@ namespace tk
                 if (bResetCar)
                 {
                     car.RestorePosRot();
+
+
+                    if(coneSpawner){
+                        cc.resetConesOnEpisode();
+                    }
 
                     if (carObj != null)
                     {

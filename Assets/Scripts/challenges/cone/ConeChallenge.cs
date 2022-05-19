@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Text;
 
 public class ConeChallenge : MonoBehaviour, IWaitCarPath
 {
@@ -13,7 +15,92 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
     public int nodesAfterStart = 10;
     public GameObject[] conePrefabs;
     private List<GameObject> createdObjects = new List<GameObject>();
+    private int coneIndex=0;
+    private string coneconfigFile ="./config.json";
+    private string predefinedConesFile="./predefinedCones.txt";
+    private bool isConfigFileExists=false;
+    private bool isCarPresent=false;
+    private bool prevIsCarPresent=false;
 
+    class ConfigJson{
+        public int coneCount;
+        public bool randomizeConesEveryReset;
+    }
+
+
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.V)){
+            saveCones();
+        }
+    }
+    public void checkConfigFile(){
+        if(File.Exists(predefinedConesFile)){
+            loadConesFromFile();
+            return;
+        }
+        if(File.Exists(coneconfigFile)){
+
+            ConfigJson configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+
+            // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
+            int coneCount=configJson.coneCount;
+            numRandCone=coneCount;
+            ResetChallenge();
+            isConfigFileExists=true;
+        }
+        else{
+            Debug.Log("No Cofig File for Cones");
+        }
+    }
+
+    public void resetConesOnEpisode(){
+        if(File.Exists(coneconfigFile)){
+            ConfigJson configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+            if(configJson.randomizeConesEveryReset){
+                int coneCount=configJson.coneCount;
+                numRandCone=coneCount;
+                ResetChallenge();
+                isConfigFileExists=true;
+
+            }
+
+            // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
+        }
+        else{
+            Debug.Log("No Cofig File for Cones");
+        }
+    }
+    public void saveCones(){
+        using (StreamWriter writer = new StreamWriter("./predefinedCones.txt", false))
+        {
+            foreach (GameObject createdObject in createdObjects)
+            {
+                Vector3 conepos = createdObject.transform.position;
+                string coneName=createdObject.name;
+                writer.WriteLine(conepos.ToString()+ "*" + coneName); 
+            }
+        }
+    }
+    public void loadConesFromFile(){
+        string[] conesRawInfo = File.ReadAllLines(predefinedConesFile);
+        foreach (GameObject createdObject in createdObjects)
+        {
+            GameObject.Destroy(createdObject);
+        }
+        createdObjects = new List<GameObject>();
+        foreach (string text in conesRawInfo)
+        {
+            string[] info= text.Split('*');
+            string vector3String=info[0].Replace("(", "").Replace(")"," ");//Replace "(" and ")" in the string with ""
+            string[] vector3StringValues=vector3String.Split(',');
+            Vector3 posVector= new Vector3(float.Parse(vector3StringValues[0]), float.Parse(vector3StringValues[1]), float.Parse(vector3StringValues[2]));
+            GameObject go = Instantiate(conePrefabs[iConePrefab], posVector, conePrefabs[iConePrefab].transform.rotation);
+            go.name=info[1];
+            createdObjects.Add(go);
+
+        }
+    }
     public void Init()
     {
         if (!GlobalState.generateRandomCones) { return; }
@@ -21,8 +108,20 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
         {
             GameObject.Destroy(createdObject);
         }
-        createdObjects = new List<GameObject>();
-        Generate();
+        if(!GlobalState.isPredefinedCones){
+            if(!isConfigFileExists){
+                numRandCone=GlobalState.coneCount;
+            }
+            createdObjects = new List<GameObject>();
+            Generate();
+        }
+        else{
+            GeneratePredefinedCones();
+        }
+    }
+
+    public void GeneratePredefinedCones(){
+        
     }
 
     public void Generate()
@@ -55,6 +154,8 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
             Vector3 rand_pos_offset = new Vector3(Random.Range(-coneOffset, coneOffset), 0, Random.Range(-coneOffset, coneOffset));
             Vector3 xz_coords = new Vector3(random_node.pos.x, random_node.pos.y + coneHeightOffset, random_node.pos.z);
             GameObject go = Instantiate(conePrefabs[iConePrefab], xz_coords + rand_pos_offset, conePrefabs[iConePrefab].transform.rotation);
+            // Debug.Log(xz_coords+""+rand_pos_offset);
+            go.name="Cone_"+random_index;
             ColCone col = go.GetComponentInChildren<ColCone>();
             if (col != null) { col.index = index; }
             createdObjects.Add(go);

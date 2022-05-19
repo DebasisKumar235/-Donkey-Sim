@@ -386,6 +386,12 @@ public class CarSpawner : MonoBehaviour
         // to various places in game that need to hook into the car.
         GameObject go = GameObject.Instantiate(carPrefab) as GameObject;
 
+        GameObject coneSpawner=GameObject.Find("ConeChallenge");
+        ConeChallenge cc=coneSpawner.GetComponent<ConeChallenge>();
+        if(coneSpawner){
+            cc.checkConfigFile();
+        }
+
         if (go == null)
         {
             Debug.LogError("CarSpawner failed to instantiate prefab!");

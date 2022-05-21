@@ -222,6 +222,13 @@ public class RoadBuilder : MonoBehaviour, IWaitCarPath
                 colliderRight.transform.SetPositionAndRotation(rightPos,nodeA.rotation);
                 colliderRight.transform.SetParent(rightColliderParent.transform);
             }
+            if(iVert == numVerts-4){
+                Collider colliderCenter=GameObject.Instantiate(roadCollider);
+                colliderCenter.transform.SetPositionAndRotation(centerNode.pos,nodeA.rotation);
+                colliderCenter.transform.Rotate(Vector3.up, 90);
+                colliderCenter.transform.SetParent(rightColliderParent.transform);
+
+            }
             i++;
 
             vertices[iVert] = leftPos;

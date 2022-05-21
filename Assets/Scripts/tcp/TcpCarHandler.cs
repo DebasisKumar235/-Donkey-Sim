@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.IO;
 
 namespace tk
 {
@@ -52,6 +53,13 @@ namespace tk
         GameObject coneSpawner;
         ConeChallenge cc;
 
+        MenuHandler menuHandler;
+
+        private string coneconfigFile ="./config.json";
+        private ConfigJson configJson;
+
+
+
 
         public Texture2D encoderTex;
 
@@ -66,7 +74,13 @@ namespace tk
 
         void Awake()
         {
+            menuHandler = GameObject.FindObjectOfType<MenuHandler>();
+
             coneSpawner=GameObject.Find("ConeChallenge");
+
+            if(File.Exists(coneconfigFile)){
+                configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+            }
             if(coneSpawner){
                 cc=coneSpawner.GetComponent<ConeChallenge>();
             }
@@ -627,6 +641,43 @@ namespace tk
                     if(coneSpawner){
                         cc.resetConesOnEpisode();
                     }
+                    if(File.Exists(coneconfigFile)){
+                        configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+                    }
+                    else{
+                        configJson=null;
+                    }
+                    if(configJson!=null){
+                        if(configJson.castShadows){
+                            GameObject shadowModifier=GameObject.Find("ShadowModifier");
+                            if(shadowModifier){
+                                shadowModifier.GetComponent<TreeShadowRemover>().setShadows();
+                            }
+                        }
+                        else{
+                            GameObject shadowModifier=GameObject.Find("ShadowModifier");
+                            if(shadowModifier){
+                                shadowModifier.GetComponent<TreeShadowRemover>().setNoShadows();
+                            }
+                        }
+                    }
+                    if(menuHandler){
+                        if(configJson!=null){
+                            
+                            if(configJson.randomRoads){
+                                if(configJson.randomRoadTextures){
+                                    menuHandler.OnNextTrack();
+
+                                }
+                                else if(configJson.randomRoadPath){
+
+                                    menuHandler.OnRegenTrack();
+                                }
+                            }
+                        }
+
+                    }
+
 
                     if (carObj != null)
                     {

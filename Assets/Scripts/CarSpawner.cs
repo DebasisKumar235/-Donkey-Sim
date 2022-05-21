@@ -387,8 +387,8 @@ public class CarSpawner : MonoBehaviour
         GameObject go = GameObject.Instantiate(carPrefab) as GameObject;
 
         GameObject coneSpawner=GameObject.Find("ConeChallenge");
-        ConeChallenge cc=coneSpawner.GetComponent<ConeChallenge>();
         if(coneSpawner){
+            ConeChallenge cc=coneSpawner.GetComponent<ConeChallenge>();
             cc.checkConfigFile();
         }
 

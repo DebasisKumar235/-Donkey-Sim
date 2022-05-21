@@ -1,4 +1,9 @@
 {
-    "coneCount":100,
-    "randomizeConesEveryReset":true
+    "createCones":true,
+    "coneCount":10,
+    "randomizeConesEveryReset":true,
+    "randomRoads":true,
+    "randomRoadTextures":true,
+    "randomRoadPath":true,
+    "castShadows":true
 }

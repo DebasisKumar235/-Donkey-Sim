@@ -22,10 +22,6 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
     private bool isCarPresent=false;
     private bool prevIsCarPresent=false;
 
-    class ConfigJson{
-        public int coneCount;
-        public bool randomizeConesEveryReset;
-    }
 
 
 
@@ -35,52 +31,65 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
         }
     }
     public void checkConfigFile(){
-        if(File.Exists(predefinedConesFile)){
-            loadConesFromFile();
-            return;
-        }
+        ConfigJson configJson;
         if(File.Exists(coneconfigFile)){
+            configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+            if(File.Exists(predefinedConesFile)){
+                loadConesFromFile();
+                return;
+            }
+            if(configJson  != null && configJson.createCones){
 
-            ConfigJson configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
+                
 
-            // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
-            int coneCount=configJson.coneCount;
-            numRandCone=coneCount;
-            ResetChallenge();
-            isConfigFileExists=true;
-        }
-        else{
-            Debug.Log("No Cofig File for Cones");
+                // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
+                int coneCount=configJson.coneCount;
+                numRandCone=coneCount;
+                ResetChallenge();
+                isConfigFileExists=true;
+            }
+            else{
+                Debug.Log("No Cofig File for Cones");
+            }
         }
     }
 
     public void resetConesOnEpisode(){
 
-        if(File.Exists(predefinedConesFile)){
-            loadConesFromFile();
-            return;
-        }
         if(File.Exists(coneconfigFile)){
+
             ConfigJson configJson=JsonUtility.FromJson<ConfigJson>(File.ReadAllText(coneconfigFile));
-            if(configJson.randomizeConesEveryReset){
-                int coneCount=configJson.coneCount;
-                numRandCone=coneCount;
-                ResetChallenge();
-                isConfigFileExists=true;
+
+            if(File.Exists(predefinedConesFile)){
+                loadConesFromFile();
                 return;
-
             }
-            if(configJson.coneCount!=numRandCone){
-                int coneCount=configJson.coneCount;
-                numRandCone=coneCount;
-                ResetChallenge();
-            }
+            if(configJson.createCones){
+                if(configJson.randomizeConesEveryReset){
+                    int coneCount=configJson.coneCount;
+                    numRandCone=coneCount;
+                    ResetChallenge();
+                    isConfigFileExists=true;
+                    return;
 
-            // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
+                }
+                if(configJson.coneCount!=numRandCone){
+                    int coneCount=configJson.coneCount;
+                    numRandCone=coneCount;
+                    ResetChallenge();
+                }
+
+                // int coneCount=int.Parse(File.ReadAllText(coneconfigFile));
+            }
+            else{
+                foreach (GameObject createdObject in createdObjects)
+                {
+                    GameObject.Destroy(createdObject);
+                }
+                Debug.Log("No Cofig File for Cones");
+            }
         }
-        else{
-            Debug.Log("No Cofig File for Cones");
-        }
+
     }
     public void saveCones(){
         using (StreamWriter writer = new StreamWriter("./predefinedCones.txt", false))

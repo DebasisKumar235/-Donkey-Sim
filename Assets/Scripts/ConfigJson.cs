@@ -10,5 +10,9 @@ using UnityEngine;
         public bool randomRoadTextures;
         public bool randomRoadPath;
         public bool castShadows;
+        public int spanNumber;
+        public bool alternatingCones;
+        public int coneRange;
+        public bool randomizationConeRange;
     }
 

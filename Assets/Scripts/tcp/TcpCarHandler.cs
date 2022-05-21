@@ -665,6 +665,9 @@ namespace tk
                         if(configJson!=null){
                             
                             if(configJson.randomRoads){
+                                GameObject pathManagerObj= GameObject.Find("PathManager");
+                                PathManager pm=pathManagerObj.GetComponent<PathManager>();
+                                pm.numSpans=configJson.spanNumber;
                                 if(configJson.randomRoadTextures){
                                     menuHandler.OnNextTrack();
 

@@ -64,6 +64,10 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
                 loadConesFromFile();
                 return;
             }
+            if(configJson.alternatingCones){
+                AlternatingCones(configJson.coneRange,configJson.randomizationConeRange);
+                return;
+            }
             if(configJson.createCones){
                 if(configJson.randomizeConesEveryReset){
                     int coneCount=configJson.coneCount;
@@ -184,6 +188,41 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
             col.name="Cone_"+random_index;
             if (col != null) { col.index = index; }
             createdObjects.Add(go);
+        }
+    }
+
+        public void AlternatingCones(int everyNnode,bool randomizationConeRange)
+    {
+        if (pathManager.carPath.centerNodes != null && pathManager.carPath.centerNodes.Count > 0)
+        {
+            foreach (GameObject createdObject in createdObjects)
+            {
+                GameObject.Destroy(createdObject);
+            }
+            if (randomizationConeRange){
+                everyNnode=Random.Range(10,everyNnode);
+            }
+        createdObjects = new List<GameObject>();
+            List<PathNode> nodes=pathManager.carPath.centerNodes;
+            int offsetFromCenter=2;
+            int j=0;
+            for(int i=10;i<nodes.Count;i+=everyNnode){
+                PathNode n=nodes[i];
+                Vector3 conePos;
+                if(j%2==1){
+
+                    conePos=new Vector3(n.pos.x+offsetFromCenter,n.pos.y,n.pos.z);
+                }
+                else{
+                    conePos=new Vector3(n.pos.x-offsetFromCenter,n.pos.y,n.pos.z);
+                }
+                GameObject go = Instantiate(conePrefabs[iConePrefab], conePos, conePrefabs[iConePrefab].transform.rotation);
+                j++;
+                createdObjects.Add(go);
+                Debug.Log("askdfjaksdfjaksdfjkasdfjaksdjfkasdjfkadsjfkjsdkfjk");
+
+            }
+
         }
     }
 }

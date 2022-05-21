@@ -2,8 +2,12 @@
     "createCones":true,
     "coneCount":10,
     "randomizeConesEveryReset":true,
-    "randomRoads":true,
+    "randomRoads":false,
+    "alternatingCones":true,
+    "coneRange":50,
+    "randomizationConeRange":true,
     "randomRoadTextures":true,
     "randomRoadPath":true,
-    "castShadows":true
+    "castShadows":true,
+    "spanNumber":400
 }

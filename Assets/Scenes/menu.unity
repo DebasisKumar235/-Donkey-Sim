@@ -236,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1.4, y: 1}
-  m_AnchoredPosition: {x: 1.6710205, y: 0}
+  m_AnchoredPosition: {x: 1.659729, y: 0}
   m_SizeDelta: {x: 4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126483966
@@ -1570,8 +1570,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1787907216}
   m_HandleRect: {fileID: 1787907214}
   m_Direction: 0
-  m_Value: 0.00060792215
-  m_Size: 0.7127695
+  m_Value: 0.00060787756
+  m_Size: 0.7128197
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2111,10 +2111,7 @@ MonoBehaviour:
   scene_names:
   - warren
   - circuit_launch
-  - sparkfun_avc
   - waveshare
-  - roboracingleague_1
-  - warehouse
   - generated_track
   - generated_road
   - mini_monaco
@@ -2125,6 +2122,7 @@ MonoBehaviour:
   - generated_road_v2
   - generated_road_v3
   - generated_road_v4
+  - straight_road
   loader: {fileID: 2140273047}
   ButtonGridLayout: {fileID: 126483964}
   ButtonPrefab: {fileID: 5466719870426124411, guid: fb93d9878115b39438221fec2f89f2ae,

@@ -648,6 +648,12 @@ namespace tk
                         configJson=null;
                     }
                     if(configJson!=null){
+                        if(Time.timeScale!=configJson.timeScale){
+                                Time.timeScale=configJson.timeScale;
+                        }
+                        if(Application.targetFrameRate!=configJson.fps){
+                            Application.targetFrameRate=configJson.fps;
+                        }
                         if(configJson.castShadows){
                             GameObject shadowModifier=GameObject.Find("ShadowModifier");
                             if(shadowModifier){
@@ -663,7 +669,7 @@ namespace tk
                     }
                     if(menuHandler){
                         if(configJson!=null){
-                            
+
                             if(configJson.randomRoads){
                                 GameObject pathManagerObj= GameObject.Find("PathManager");
                                 PathManager pm=pathManagerObj.GetComponent<PathManager>();

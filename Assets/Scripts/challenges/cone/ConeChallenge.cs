@@ -65,7 +65,7 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
                 return;
             }
             if(configJson.alternatingCones){
-                AlternatingCones(configJson.coneRange,configJson.randomizationConeRange);
+                AlternatingCones(configJson.coneRange,configJson.randomizationConeRange,configJson.notRegenerate);
                 return;
             }
             if(configJson.createCones){
@@ -191,8 +191,13 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
         }
     }
 
-        public void AlternatingCones(int everyNnode,bool randomizationConeRange)
+    private int ind=0;
+        public void AlternatingCones(int everyNnode,bool randomizationConeRange,bool notRegenerate)
     {
+        if(ind>0 && notRegenerate ){
+            return;
+        }
+        ind++;
         if (pathManager.carPath.centerNodes != null && pathManager.carPath.centerNodes.Count > 0)
         {
             foreach (GameObject createdObject in createdObjects)
@@ -219,7 +224,6 @@ public class ConeChallenge : MonoBehaviour, IWaitCarPath
                 GameObject go = Instantiate(conePrefabs[iConePrefab], conePos, conePrefabs[iConePrefab].transform.rotation);
                 j++;
                 createdObjects.Add(go);
-                Debug.Log("askdfjaksdfjaksdfjkasdfjaksdjfkasdjfkadsjfkjsdkfjk");
 
             }
 

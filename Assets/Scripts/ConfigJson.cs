@@ -14,5 +14,8 @@ using UnityEngine;
         public bool alternatingCones;
         public int coneRange;
         public bool randomizationConeRange;
+        public int fps;
+        public float timeScale;
+        public bool notRegenerate;
     }
 

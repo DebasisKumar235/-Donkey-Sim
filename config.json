@@ -1,13 +1,17 @@
 {
-    "createCones":true,
-    "coneCount":10,
+    "createCones":false,
+    "coneCount":20,
     "randomizeConesEveryReset":true,
     "randomRoads":false,
     "alternatingCones":true,
-    "coneRange":50,
+    "coneRange":20,
     "randomizationConeRange":true,
     "randomRoadTextures":true,
     "randomRoadPath":true,
-    "castShadows":true,
-    "spanNumber":400
+    "castShadows":false,
+    "spanNumber":400,
+    "fps":100,
+    "timeScale":2,
+    "notRegenerate":true
+
 }
